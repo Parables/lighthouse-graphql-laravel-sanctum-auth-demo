@@ -9,13 +9,22 @@ type User {
     id: ID!
     username: String!
     email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type AuthUser {
+    id: ID!
+    username: String!
+    email: String!
     api_token: String
     created_at: DateTime!
     updated_at: DateTime!
 }
 
+
 type Query {
-    me: User @auth(guard: "sanctum")
+    me: AuthUser @auth(guard: "sanctum")
     user(id: ID @eq): User @find
     users: [User!]! @paginate(defaultCount: 10)
 }
@@ -25,10 +34,10 @@ type Mutation {
         username: String!
         email: String! @rules(apply: ["email", "unique:users"])
         password: String! @hash @rules(apply: ["min:6"])
-    ): User @create
+    ): User  @can(ability: "create") @create
 
     "Log in to a new session and get the user."
-    login(email: String!, password: String!): User
+    login(email: String!, password: String!): AuthUser!
     "Log out from the current session, showing the user one last time."
     logout: User @guard
 }

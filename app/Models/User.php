@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Laravel\Sanctum\NewAccessToken;
-
 
 /**
  * @property string api_token
@@ -26,7 +24,6 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'api_token'
     ];
 
     /**
@@ -37,6 +34,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'api_token'
     ];
 
     /**
@@ -48,7 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function  withToken(string $name, array $abilities = ['*']): User
+    public function withToken(string $name, array $abilities = ['*']): User
     {
         $this->api_token = $this->createToken($name, $abilities)->plainTextToken;
         $this->save();

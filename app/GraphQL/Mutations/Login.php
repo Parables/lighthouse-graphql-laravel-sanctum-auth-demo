@@ -3,22 +3,23 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\User;
-use Error;
+use GraphQL\Error\Error;
 use Illuminate\Support\Facades\Auth;
+
 class Login
 {
     /**
-     * @param  null  $_
-     * @param  array<string, mixed>  $args
+     * @param null $_
+     * @param array<string, mixed> $args
+     * @throws Error
      */
     public function __invoke($_, array $args): ?User
     {
         // Plain Laravel: Auth::guard()
         // Laravel Sanctum: Auth::guard(config('sanctum.guard', 'web'))
         $guard = Auth::guard(config('sanctum.guard', 'web'));
-        if( ! $guard->attempt($args, true)) {
-//            throw new Error('Invalid credentials.');
-            return  null;
+        if (! $guard->attempt($args, true)) {
+            throw  new Error("Invalid credentials");
         }
 
         /**
