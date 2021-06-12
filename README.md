@@ -7,6 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Getting Started
+Setting up authentication and authorization is so easy with Laravel. When you use it with [Lighthouse-PHP](https://lighthouse-php.com), the [docs](https://lighthouse-php.com/5/security/authentication.html#authentication) is less helpful: ["...Many things are unclear"](https://stackoverflow.com/questions/63959930/laravel-graphql-and-sanctum-how-to-combine-it).
+
+
+In this repo, I have gone through all the hops, to get it working. Each branch is a step towards setting this up. 
+Detailed steps coming soon but for now, simply clone this repo and add your schema files, models and migration and build your apps
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
